@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:behaviors="clr-namespace:Skills.Behaviors" 
+             xmlns:navigationdrawer="clr-namespace:Syncfusion.SfNavigationDrawer.XForms;assembly=Syncfusion.SfNavigationDrawer.XForms"
+             x:Class="Skills.Views.SkillsView"
+             Title="Skills">
+
+    <ContentPage.ToolbarItems >
+        <ToolbarItem  Command="{Binding AddCommand}" Text="Add" IconImageSource="ic_Add.png">
+        </ToolbarItem>
+ 
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+     
+        <Grid>
+            <Grid.RowDefinitions >
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition Height="50"></RowDefinition>
+            </Grid.RowDefinitions>
+      
+            <ListView  Grid.Row="0" HasUnevenRows="True" CachingStrategy="RecycleElement"
+            ItemsSource="{Binding SKills}" 
+                       Margin="0,50,0,0">
+                <ListView.Behaviors>
+                    <behaviors:EventToCommandBehavior 
+                    EventName="ItemTapped" 
+                    Command="{Binding SkillSelectedCommand}" 
+                    EventArgsConverter="{StaticResource LocalItemTappedConverter}" 
+                   >
+                    </behaviors:EventToCommandBehavior>
+                </ListView.Behaviors>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell Height="100">
+                            <Grid HeightRequest="100" BackgroundColor="White" RowSpacing="2">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition  Width="125"></ColumnDefinition>
+                                    <ColumnDefinition  Width="*"></ColumnDefinition>
+                                    <ColumnDefinition  Width="50"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                       <Ellipse
+                       Grid.Row="0"
+                       Grid.Column="0"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       WidthRequest="50"
+                       HeightRequest="50"
+                       Stroke="black"
+                       StrokeThickness="1">
+                                    <Ellipse.Style>
+                                        <Style TargetType="Ellipse">
+                                            <Style.Triggers>
+                                                <DataTrigger  TargetType="Ellipse"  Binding="{Binding Proficiencylevel}" Value="20">
+                                                    <Setter Property="Fill"  Value="Red" />
+                                                </DataTrigger>
+                                                <DataTrigger TargetType="Ellipse" Binding="{Binding  Proficiencylevel}" Value="70">
+                                                    <Setter Property="Fill" Value="yellow" />
+                                                </DataTrigger>
+                                                <DataTrigger  TargetType="Ellipse" Binding="{Binding Proficiencylevel}" Value="89">
+                                                    <Setter Property="Fill" Value="blue" />
+                                                </DataTrigger>
+                                                <DataTrigger TargetType="Ellipse"  Binding="{Binding   Proficiencylevel }" Value="90">
+                                                    <Setter Property="Fill" Value="green" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Ellipse.Style>
+                                </Ellipse>
+                                
+                                <Label TextColor="black" Grid.Row=" 0" Grid.Column="1" VerticalOptions ="Center" Text="{Binding Skillname }"></Label>
+                                <Label TextColor="black" Grid.Row=" 0" Grid.Column="2" VerticalOptions="Center" Text="{Binding Proficiencylevel,  StringFormat=' {0} %'}"></Label>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+                <ListView.Footer  >
+                    <StackLayout Background="#22cfa7" WidthRequest="60" Padding="10" >
+                        <Label  HorizontalOptions="Center" VerticalOptions="Center" Text="Footer "/>
+                    </StackLayout>
+                </ListView.Footer>
+            </ListView>
+            <Button Grid.Row="1" Text="Refresh" Style="{StaticResource RegularButtonStyle}"  BackgroundColor="#22cfa7"  Command="{Binding LoadCommand}"></Button>
+
+        </Grid>
+    </ContentPage.Content>
+
+  
+
+</ContentPage>
+

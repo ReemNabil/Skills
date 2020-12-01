@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Skills.Views.SkillsDetailsView">
+
+    <ContentPage.Content>
+        <ScrollView Margin="10">
+            <Grid  Grid.Row="1" x:Name="Grid">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"></RowDefinition>
+                    <RowDefinition Height="150"></RowDefinition>
+                    <RowDefinition Height="50"></RowDefinition>
+                    <RowDefinition Height="50"></RowDefinition>
+                    <RowDefinition Height="200"></RowDefinition>
+                    <RowDefinition Height="50"></RowDefinition>
+                    <RowDefinition Height="50"></RowDefinition>
+                    <RowDefinition Height="50"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width=".4*"></ColumnDefinition>
+                    <ColumnDefinition Width=".4*"></ColumnDefinition>
+                    <ColumnDefinition Width=".05*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+             
+                <Label Text="Skill Name" 
+                   Grid.Row="0" 
+                   TextDecorations="Underline" 
+                   Grid.Column="0"
+                   TextColor="black"
+                   Margin="10"></Label>
+                <Entry Grid.Row="0"
+                   Grid.Column="1"
+                   TextColor="black"
+                   Text="{Binding SelectedSkill.Skillname, Mode=TwoWay}"
+                   Style="{StaticResource RegularEntry}"></Entry>
+                <Label Text="Proficiency level" 
+                   Grid.Row="1" 
+                   Grid.Column="0"
+                   TextColor="black"
+                   Style="{StaticResource SmallLabelStyle}"></Label>
+                <Entry Grid.Row="1"
+                   Grid.Column="1"
+                   TextColor="black"
+                   WidthRequest="20"
+                   MaxLength="100"
+                   Text="{Binding SelectedSkill.Proficiencylevel, Mode=TwoWay}"
+                   Style="{StaticResource RegularEntry}"></Entry>
+                <Label Text="Proficiency level Indicator" 
+                   Grid.Row="2" 
+                   TextColor="black"
+                   Grid.Column="0"
+                   Style="{StaticResource SmallLabelStyle}"></Label>
+                <Ellipse
+                       Grid.Row="2"
+                       Grid.Column="1"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Center"
+                       WidthRequest="50"
+                       HeightRequest="50"
+                       Stroke="black"
+                       Fill="{Binding SelectedSkill.Color}" 
+                       StrokeThickness="1"
+                    >
+                    <Ellipse.Style>
+                        <Style TargetType="Ellipse">
+                            <Style.Triggers>
+
+                                <DataTrigger  TargetType="Ellipse"  Binding="{Binding SelectedSkill.Proficiencylevel}" Value="20">
+                                    <Setter Property="Fill"  Value="Red" />
+                                </DataTrigger>
+                                <DataTrigger TargetType="Ellipse" Binding="{Binding  SelectedSkill.Proficiencylevel}" Value="70">
+                                    <Setter Property="Fill" Value="yellow" />
+                                </DataTrigger>
+                                <DataTrigger  TargetType="Ellipse" Binding="{Binding SelectedSkill.Proficiencylevel}" Value="89">
+                                    <Setter Property="Fill" Value="blue" />
+                                </DataTrigger>
+                                <DataTrigger TargetType="Ellipse"  Binding="{Binding   SelectedSkill.Proficiencylevel }" Value="90">
+                                    <Setter Property="Fill" Value="green" />
+                                </DataTrigger>
+
+                            </Style.Triggers>
+                        </Style>
+                    </Ellipse.Style>
+                </Ellipse>
+                <Label 
+                   Grid.Row="1"
+                   Grid.Column="2"
+                   TextColor="black"
+                   Text="%"
+                   Style="{StaticResource RegularEntry}">
+
+                </Label>
+                <Slider Grid.Row="3" Maximum="100"
+                        BackgroundColor="Transparent" 
+                        Grid.Column="0"  
+                        Value="{Binding SelectedSkill.Proficiencylevel}"
+                        ThumbColor="#22cfa7"
+                        MaximumTrackColor="#22cfa7"
+                        MinimumTrackColor="#22cfa7"
+                        HorizontalOptions="FillAndExpand"
+                        HeightRequest="20"/>
+                <Ellipse
+                      Grid.Row="3" Grid.Column="1"  
+                       HorizontalOptions="End"
+                       VerticalOptions="Center"
+                       WidthRequest="50"
+                       HeightRequest="50"
+                       Stroke="black"
+                       StrokeThickness="1"
+                    >
+                    <Ellipse.Style>
+                        <Style TargetType="Ellipse">
+                            <Style.Triggers>
+                               
+                                <DataTrigger  TargetType="Ellipse"  Binding="{Binding SelectedSkill.Proficiencylevel}" Value="20">
+                                    <Setter Property="Fill"  Value="Red" />
+                                </DataTrigger>
+                                <DataTrigger TargetType="Ellipse" Binding="{Binding  SelectedSkill.Proficiencylevel}" Value="70">
+                                    <Setter Property="Fill" Value="yellow" />
+                                </DataTrigger>
+                                <DataTrigger  TargetType="Ellipse" Binding="{Binding SelectedSkill.Proficiencylevel}" Value="89">
+                                    <Setter Property="Fill" Value="blue" />
+                                </DataTrigger>
+                                <DataTrigger TargetType="Ellipse"  Binding="{Binding   SelectedSkill.Proficiencylevel }" Value="90">
+                                    <Setter Property="Fill" Value="green" />
+                                </DataTrigger>
+
+
+                            </Style.Triggers>
+                        </Style>
+                    </Ellipse.Style>
+                </Ellipse>
+                <Label 
+                   Grid.Row="3"
+                   Grid.Column="2"
+                   TextColor="black"
+                   Text="%"
+                   Style="{StaticResource RegularEntry}">
+                </Label>
+                <Label Text="Proficiency  Description" 
+                   Grid.Row="4" 
+                   Grid.Column="0"
+                   TextColor="black"
+                   Style="{StaticResource SmallLabelStyle}"></Label>
+                <Editor Grid.Row="4"
+                   Grid.Column="1"
+                   TextColor="black"
+                   WidthRequest="20"
+                   HeightRequest="50"
+                   Text="{Binding SelectedSkill.SkillDescription, Mode=TwoWay}"
+                   Style="{StaticResource RegularEntry}"></Editor>
+                <Button x:Name="Save" 
+                    Command="{Binding SaveCommand}"
+                    Text="Save" 
+                    Style="{StaticResource RegularButtonStyle}" 
+                    Grid.Row="5" 
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"></Button>
+            </Grid>
+        </ScrollView>
+
+    </ContentPage.Content>
+</ContentPage>
