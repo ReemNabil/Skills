@@ -1,6 +1,7 @@
 ﻿using Skills.Models;
 using Skills.Services;
 using Skills.Utility;
+using System;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -26,6 +27,14 @@ namespace Skills.ViewModels
             AddCommand = new Command(OnAddCommand);
             LoadCommand = new Command(OnLoadCommand);
             SkillSelectedCommand = new Command<Skill>(OnSkillSelectedCommand);
+            MessagingCenter.Subscribe<SkillsDetailsViewModel, Skill>
+                (this, MessageNames.SkillsChangedMessage, OnSkillsListChange);
+        }
+
+        private void OnSkillsListChange(SkillsDetailsViewModel sender, Skill skill)
+        {
+            skills = new ObservableCollection<Skill>(_skillService.GetAllSkills());
+
         }
 
         private void OnLoadCommand()
