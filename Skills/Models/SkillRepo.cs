@@ -5,6 +5,7 @@ namespace Skills.Models
 {
     public static class SkillRepo
     {
+        //gereric repo
         public static List<Skill> skills;
         static SkillRepo()
         {
@@ -12,11 +13,11 @@ namespace Skills.Models
             {
                 var db = new SkillsDB().connection;
                 skills = db.Table<Skill>().ToList();
-                SeedData();
+                RunSeedData();
             }
         }
 
-        public static void SeedData() 
+        public static void RunSeedData() 
         {
             var db = new SkillsDB().connection;
             skills = db.Table<Skill>().ToList();
@@ -35,6 +36,7 @@ namespace Skills.Models
         }
         public static void AddSkill(Skill skill)
         {
+            // App class shouldn't refernce here 
             var db = App.dataBase.connection;
             db.Insert(skill);
         }

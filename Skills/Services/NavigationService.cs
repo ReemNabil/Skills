@@ -5,7 +5,9 @@ using System.Runtime.CompilerServices;
 using Xamarin.Forms;
 
 namespace Skills.Services
-{
+{   // view model first navigation better than page first approach
+    // generic navigation 
+    // 
     public class NavigationService : INavigationService
     {
         private Dictionary<string, Type> pages { get; } = new Dictionary<string, Type>();

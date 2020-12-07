@@ -45,13 +45,13 @@ namespace Skills.ViewModels
         private void OnSkillSelectedCommand(Skill obj)
         {
 
-           App.navigationService.NavigateTo(Viewnames.SkillsDetailsView, obj);
+            _navigationService.NavigateTo(Viewnames.SkillsDetailsView, obj);
 
         }
 
         private void OnAddCommand()
         {
-           App.navigationService.NavigateTo(Viewnames.SkillsDetailsView);
+            _navigationService.NavigateTo(Viewnames.SkillsDetailsView);
         }
 
 

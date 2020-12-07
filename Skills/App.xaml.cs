@@ -27,7 +27,7 @@ namespace Skills
         {
 
             Device.SetFlags(new string[] { "Shapes_Experimental" });
-       
+       // better in utitly 
             InitializeComponent();
             navigationService.Configure(Viewnames.SkillsDetailsView, typeof(SkillsDetailsView));
             navigationService.Configure(Viewnames.SkillsView, typeof(SkillsView));
