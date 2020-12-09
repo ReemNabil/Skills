@@ -16,7 +16,7 @@ namespace Skills.Services
 
         public void Configure(string key, Type pageType) => pages[key] = pageType;
 
-        public void GoBack() => MainPage.Navigation.PopModalAsync();
+        public void GoBack() => MainPage.Navigation.PopAsync();
 
         public void NavigateTo(string pageKey, object parameter = null)
         {
@@ -24,9 +24,10 @@ namespace Skills.Services
             {
                 var page = (Page)Activator.CreateInstance(pageType);
                 page.SetNavigationArgs(parameter);
-                MainPage.Navigation.PushModalAsync(page);
-                (page.BindingContext as ViewModelBase).Initialize(parameter);
 
+                MainPage.Navigation.PushAsync(page);
+
+                (page.BindingContext as ViewModelBase).Initialize(parameter);
             }
             else
             {

@@ -2,13 +2,14 @@
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:converter="clr-namespace:DemoApp.Converter"
-             x:Class="Skills.App">
+             x:Class="Skills.App"
+             >
     <Application.Resources>
         <Color x:Key="BethanysGreenColor">#22cfa7</Color>
 
         <converter:ItemTappedConverter x:Key="LocalItemTappedConverter"></converter:ItemTappedConverter>
- 
-        
+     
+
         <Style x:Key="RegularButtonStyle" TargetType="Button">
             <Setter Property="HorizontalOptions" Value="Center"></Setter>
             <Setter Property="VerticalOptions" Value="Start"></Setter>

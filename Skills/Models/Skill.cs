@@ -15,7 +15,7 @@ namespace Skills.Models
         [PrimaryKey, AutoIncrement]
         public int Id
         {
-            get => id;
+            get=> id;
             set
             {
                 id = value;

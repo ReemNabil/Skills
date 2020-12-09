@@ -10,7 +10,7 @@ namespace Skills.Views
         public SkillsDetailsView()
         {
             InitializeComponent();
-            BindingContext = ViewModelLocator.skillsDetailsView;
+            BindingContext = ViewModelLocator.skillsDetailsViewModel;
         }
     }
 }

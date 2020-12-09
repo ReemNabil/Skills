@@ -8,8 +8,6 @@ namespace Skills.DataBase
 {
     public class SkillsDB
     {
-
-
         public SQLiteConnection connection { get; set; }
         public SkillsDB()
         {
