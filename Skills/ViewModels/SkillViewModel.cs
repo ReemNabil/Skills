@@ -39,6 +39,8 @@ namespace Skills.ViewModels
          
         }
 
+       
+
         private async void OnUpLoadPhotoCommand(object obj)
         {
             var image = await SelectPhoto();
@@ -120,7 +122,9 @@ namespace Skills.ViewModels
 
         private void OnLoadCommand()
         {
-            skills = new ObservableCollection<Skill>(_skillService.GetAllSkills());
+            // skills = new ObservableCollection<Skill>(_skillService.GetAllSkills());
+            _navigationService.NavigateTo(Viewnames.Posts);
+
         }
 
         private void OnSkillSelectedCommand(Skill obj)

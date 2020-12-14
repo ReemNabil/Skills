@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:behaviors="clr-namespace:Skills.Behaviors"
+             x:Class="Skills.Views.Posts">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions >
+                <RowDefinition Height="*"></RowDefinition>
+              
+            </Grid.RowDefinitions>
+
+            <ListView  Grid.Row="0" HasUnevenRows="True" CachingStrategy="RecycleElement"
+            ItemsSource="{Binding Posts}" 
+                     
+                       Margin="0,50,0,0">
+                <ListView.Behaviors>
+                    <behaviors:EventToCommandBehavior 
+                    EventName="ItemTapped" 
+                    EventArgsConverter="{StaticResource LocalItemTappedConverter}">
+                    </behaviors:EventToCommandBehavior>
+                </ListView.Behaviors>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell Height="100">
+                            <Grid HeightRequest="100" BackgroundColor="White" RowSpacing="2">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition  Width="*"></ColumnDefinition>
+                                    <ColumnDefinition  Width="125"></ColumnDefinition>
+                                    <!--<ColumnDefinition  Width="125"></ColumnDefinition>
+                                    <ColumnDefinition  Width="125"></ColumnDefinition>-->
+                                </Grid.ColumnDefinitions>
+
+                                <!--<Label TextColor="black" Grid.Row=" 0" Grid.Column="1" VerticalOptions ="Center" Text="{Binding UserId }"></Label>-->
+                                <Label TextColor="black" Grid.Row=" 0" Grid.Column="1" VerticalOptions="Center" Text="{Binding Id}"></Label>
+                                <Label TextColor="black" Grid.Row=" 0" Grid.Column="0" VerticalOptions ="Center" Text="{Binding Title }"></Label>
+                                <!--<Label TextColor="black" Grid.Row=" 0" Grid.Column="4" VerticalOptions="Center" Text="{Binding Body}"></Label>-->
+
+
+
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+            </ListView>
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

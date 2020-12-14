@@ -18,7 +18,8 @@ namespace Skills.DataBase
         {
             connection = new SQLiteConnection(Constants.DatabasePath, Constants.Flags);
             connection.CreateTable<Skill>(CreateFlags.None);
-           
+            connection.CreateTable<MediaItemToUpload>(CreateFlags.None);
+
         }
     }
 }

@@ -1,12 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:custom="clr-namespace:Skills.CustomRenderers"
              x:Class="Skills.MainPage">
 
     <ContentPage.Content>
         <StackLayout>
         <!--//    Command="{Binding UpLoadCommand }-->
-                <!--Source="{Binding ImageSource.Source}"-->
+                <!--Source="{Binding ImageSource.Source}"--><!--
         <Image
                 x:Name="viewPhotoImage"
                 Aspect="AspectFill"
@@ -14,15 +15,33 @@
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="FillAndExpand"
               
-            />
+            />-->
+            <custom:ImageCircle 
+                x:Name="viewPhotoImage"
+                BackgroundColor="Transparent"
+                WidthRequest="100" 
+                HeightRequest="100"
+                Aspect="AspectFill"
+                VerticalOptions="Start" HorizontalOptions="CenterAndExpand" />
                     <!--Command="{Binding UpLoadCommand }"-->
-            <Button
-                    x:Name="PickPhoto"
-                    Clicked="PickPhotoButton_Clicked"
+            
+
+            <StackLayout Orientation="Horizontal" VerticalOptions="End">
+                <Button
+                    x:Name="TakePhotoButton"
                     BackgroundColor="#2196F3"
+                    Clicked="TakePhotoButton_Clicked"
+                    HorizontalOptions="FillAndExpand"
+                    Text="Take Photo"
+                    TextColor="White" />
+                <Button
+                    x:Name="PickPhotoButton"
+                    BackgroundColor="#2196F3"
+                    Clicked="PickPhotoButton_Clicked"
                     HorizontalOptions="FillAndExpand"
                     Text="Pick Photo"
                     TextColor="White" />
+            </StackLayout>
 
         </StackLayout>
     </ContentPage.Content>

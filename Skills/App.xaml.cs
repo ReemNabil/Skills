@@ -1,11 +1,7 @@
-﻿using CommonServiceLocator;
-using Skills.DataBase;
+﻿using Skills.DataBase;
 using Skills.Services;
 using Skills.Utility;
 using Skills.Views;
-using System;
-using Unity;
-using Unity.ServiceLocation;
 using Xamarin.Forms;
 
 namespace Skills
@@ -37,9 +33,12 @@ namespace Skills
             InitializeComponent();
             navigationService.Configure(Viewnames.SkillsDetailsView, typeof(SkillsDetailsView));
             navigationService.Configure(Viewnames.SkillsView, typeof(SkillsView));
-            //  MainPage = new MainPage();
+            navigationService.Configure(Viewnames.MainPage, typeof(MainPage));
+            navigationService.Configure(Viewnames.Posts, typeof(Posts));
+            // MainPage = new MainPage();
             Plugin.Media.CrossMedia.Current.Initialize();
             MainPage = new NavigationPage(new SkillsView());
+
             //Container.RegisterType<INavigationService, NavigationService>();
             //Container.RegisterType<ISkillService, SkillService>();
             //var unityServiceLocator = new UnityServiceLocator(Container);

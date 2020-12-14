@@ -8,6 +8,7 @@ namespace Skills.DataBase
     public  class Constants
     {
         public const string DatabaseFilename = "skills.db3";
+        public const string BaseURL = "https://jsonplaceholder.typicode.com/posts";
 
         public const SQLite.SQLiteOpenFlags Flags =
         SQLite.SQLiteOpenFlags.ReadWrite |

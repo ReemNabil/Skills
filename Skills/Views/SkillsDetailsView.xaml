@@ -157,6 +157,13 @@
                     Grid.Row="5" 
                     Grid.Column="0"
                     Grid.ColumnSpan="2"></Button>
+                <Button x:Name="upload" 
+                    Text="Upload Photo" 
+                    Style="{StaticResource RegularButtonStyle}" 
+                    Grid.Row="6" 
+                    Command="{Binding UploadCommand}"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="2"></Button>
             </Grid>
         </ScrollView>
 

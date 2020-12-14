@@ -1,12 +1,12 @@
-﻿using Plugin.Media;
+﻿using Android.Provider;
+using Plugin.Media;
+using Plugin.Media.Abstractions;
 using Plugin.Permissions;
 using Plugin.Permissions.Abstractions;
+using Skills.Models;
 using Skills.Utility;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
+using System.IO;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -18,8 +18,13 @@ namespace Skills
         {
             InitializeComponent();
             BindingContext = ViewModelLocator.skillViewModel;
-
         }
+
+
+       private byte[] image;
+
+        public byte[] Imagee { get => image; set => image = value; }
+
         private async void PickPhotoButton_Clicked(object sender, EventArgs e)
         {
             try
@@ -28,8 +33,23 @@ namespace Skills
                 if (result != null)
                     viewPhotoImage.Source = result;
                 //byte[] myimage = System.IO.File.ReadAllBytes(result);
+                SaveAsync();
+            }
+            catch (Exception ex)
+            {
+                // handle your exception
+                System.Console.WriteLine(ex);
+            }
+        }
+        private async void TakePhotoButton_Clicked(object sender, EventArgs e)
+        {
 
-
+            try
+            {
+                var result = await TakePhoto();
+                if (result != null)
+                    viewPhotoImage.Source = result;
+                SaveAsync();
             }
             catch (Exception ex)
             {
@@ -64,7 +84,6 @@ namespace Skills
 
             return imageSource;
         }
-
         private async Task<bool> RequestCameraAndGalleryPermissions()
         {
             var cameraStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Camera);
@@ -88,6 +107,66 @@ namespace Skills
 
             return true;
         }
+        public async Task<ImageSource> TakePhoto()
+        {
+            if (!CrossMedia.Current.IsCameraAvailable ||
+                    !CrossMedia.Current.IsTakePhotoSupported)
+            {
+                await DisplayAlert("No Camera", "Sorry! No camera available.", "OK");
+                return null;
+            }
 
+            var isPermissionGranted = await RequestCameraAndGalleryPermissions();
+            if (!isPermissionGranted)
+                return null;
+
+            var file = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
+            {
+                Directory = "TestPhotoFolder",
+                SaveToAlbum = true,
+                CompressionQuality = 75,
+                CustomPhotoSize = 50,
+                PhotoSize = PhotoSize.Medium,
+                MaxWidthHeight = 1000,
+            });
+
+            if (file == null)
+                return null;
+
+            var imageSource = ImageSource.FromStream(() =>
+            {
+                var stream = file.GetStream();
+                 image = GetImageStreamAsBytes(stream);
+                return stream;
+            });
+            return imageSource;
+        }
+
+        public async void SaveAsync()
+        {
+            var connection = App.dataBase.connection;
+            connection.Insert(new MediaItemToUpload { MediaType = MediaType.Audio, Image = image });
+            //Retrive From DB
+            MediaItemToUpload mediaItem = connection.Table<MediaItemToUpload>().FirstOrDefault();
+            MemoryStream mStream = new MemoryStream(mediaItem.Image);
+            var imageSource =  ImageSource.FromStream(()=>mStream);
+            viewPhotoImage.Source =imageSource;
+            
+
+
+        }
+        public byte[] GetImageStreamAsBytes(Stream input)
+        {
+            var buffer = new byte[16 * 1024];
+            using (MemoryStream ms = new MemoryStream())
+            {
+                int read;
+                while ((read = input.Read(buffer, 0, buffer.Length)) > 0)
+                {
+                    ms.Write(buffer, 0, read);
+                }
+                return ms.ToArray();
+            }
+        }
     }
 }

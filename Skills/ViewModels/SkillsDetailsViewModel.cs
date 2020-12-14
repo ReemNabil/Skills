@@ -14,6 +14,8 @@ namespace Skills.ViewModels
         public ICommand SaveCommand { get; }
         private ISkillService _skillService;
         private INavigationService _navigationService;
+        public ICommand UploadCommand { get; }
+
         public Skill SelectedSkill
         { get => selectedskill;
             set
@@ -29,9 +31,13 @@ namespace Skills.ViewModels
             _navigationService = navigationService;
             selectedskill = new Skill();
             SaveCommand = new Command(OnSaveCommand);
+            UploadCommand = new Command(OnUploadCommand);
 
         }
-
+        private void OnUploadCommand(object obj)
+        {
+            _navigationService.NavigateTo(Viewnames.MainPage);
+        }
         private void OnSaveCommand()
         {
             if (SelectedSkill.Id == 0)

@@ -11,8 +11,8 @@ namespace Skills.Utility
     public static class ViewModelLocator
     {
         // better to use framewrk like unity 
-        //public static IUnityContainer Container { get; private set; } =
-        //      new UnityContainer();
+        public static IUnityContainer Container { get; private set; } =
+              new UnityContainer();
         static ViewModelLocator()
         {
             //Container.RegisterType<INavigationService, NavigationService>();
@@ -28,12 +28,13 @@ namespace Skills.Utility
 
 
         public static SkillViewModel skillViewModel { get; set; } =
-       // new SkillViewModel(App.Container.Resolve<SkillService>(), App.Container.Resolve<NavigationService>());
-        new SkillViewModel(App.SkillService , App.navigationService);
+      //  new SkillViewModel(Container.Resolve<SkillService>(), Container.Resolve<NavigationService>());
+       new SkillViewModel(App.SkillService , App.navigationService);
 
         public static SkillsDetailsViewModel skillsDetailsViewModel { get; set; } =
-       //  new SkillsDetailsViewModel(App.Container.Resolve<SkillService>(), App.Container.Resolve<NavigationService>());
+         //new SkillsDetailsViewModel(Container.Resolve<SkillService>(), Container.Resolve<NavigationService>());
        new SkillsDetailsViewModel(App.SkillService , App.navigationService);
+        public static PostsViewModel postsViewModel { get; set; } = new PostsViewModel();
 
 
     }
